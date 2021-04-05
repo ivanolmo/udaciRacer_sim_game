@@ -117,7 +117,7 @@ function runRace(raceID) {
 		const raceInterval = setInterval(async () => {
 			try {
 				const race = await getRace(raceID);
-				console.log(race);
+				console.log(race.status);
 				if (race.status === 'in-progress') {
 					renderAt('#leaderBoard', raceProgress(race.positions))
 				} else if (race.status === 'finished') {
@@ -370,13 +370,13 @@ function createRace(player_id, track_id) {
 		body: JSON.stringify(body)
 	})
 	.then(res => res.json())
-	.catch(error => console.log("Problem with createRace request::", error))
+	.catch(error => console.log("Problem with createRace::", error))
 };
 
 function getRace(id) {
 	return fetch(`${SERVER}/api/races/${id}`)
 	.then(res => res.json())
-	.catch(error => console.log('Problem with getRace request::', error))
+	.catch(error => console.log('Problem with getRace::', error))
 };
 
 function startRace(id) {
@@ -384,7 +384,7 @@ function startRace(id) {
 		method: 'POST',
 		...defaultFetchOpts(),
 	})
-	.catch(error => console.log("Problem with startRace request::", error))
+	.catch(error => console.log("Problem with startRace::", error))
 }
 
 function accelerate(id) {
@@ -395,5 +395,5 @@ function accelerate(id) {
 		method: 'POST',
 		...defaultFetchOpts(),
 	})
-	.catch(error => console.log('Problem with accelerate request::', error))
+	.catch(error => console.log('Problem with accelerate::', error))
 };
